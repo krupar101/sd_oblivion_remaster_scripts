@@ -1,4 +1,4 @@
-# The Elder Scrolls IV: Oblivion Remastered - Stean Deck Optimization Script
+# The Elder Scrolls IV: Oblivion Remastered - Steam Deck Optimization Script
 
 <p align="center">
   <img src="https://github.com/krupar101/sd_oblivion_remaster_scripts/blob/main/oblivion-remastered.gif" alt="Folondeck" />
