@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Optimize Oblivion Remastered
+Comment=Optimizes Oblivion Remastered for Steam Deck
+Exec=bash -c "curl -s https://raw.githubusercontent.com/krupar101/sd_oblivion_remaster_scripts/refs/heads/main/optimize_oblivion_remastered_for_steam_deck.sh | bash"
+Icon=steamdeck-gaming-return
+Terminal=true
+Type=Application
+Categories=Game;
