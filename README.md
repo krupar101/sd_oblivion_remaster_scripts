@@ -13,6 +13,6 @@ bash <(curl -s https://raw.githubusercontent.com/krupar101/sd_oblivion_remaster_
 
 Alternatively you can download this .desktop file and run it from your Steam Deck Desktop: 
 
-https://raw.githubusercontent.com/krupar101/sd_oblivion_remaster_scripts/refs/heads/main/Optimize-Oblivion.desktop
+[Download Optimize-Oblivion.desktop](https://raw.githubusercontent.com/krupar101/sd_oblivion_remaster_scripts/refs/heads/main/Optimize-Oblivion.desktop)
 
 (Right-Click -> Save As -> Save it as whatever you like but ensure it ends with .desktop -> Double Click the file) 
