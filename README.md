@@ -36,23 +36,50 @@ Alternatively you can download this .desktop file and run it without the need of
 
 # Quality Preset - Screenshots
 
-![IMG_2956](https://github.com/user-attachments/assets/383db1ed-e0fe-44eb-be13-5f812b36a1fe)
-![IMG_2957](https://github.com/user-attachments/assets/d877432e-a391-47f1-9813-6f8087bd9426)
-![IMG_2958](https://github.com/user-attachments/assets/23ec4a45-8346-4822-b0f5-f04ea3e11101)
-![IMG_2959](https://github.com/user-attachments/assets/07fed2a0-da9f-4509-84bb-8d1751d5d855)
-![IMG_2960](https://github.com/user-attachments/assets/9a7e9ed0-e9dc-467a-ad6d-af973f75d6b9)
-![IMG_2961](https://github.com/user-attachments/assets/d373aab7-0ef1-4965-8e00-ca75b75da6ce)
-![screenshot](https://github.com/user-attachments/assets/782839ef-d2b7-4bd1-bc87-4c969e582a81)
+![20250428231527_1](https://github.com/user-attachments/assets/dbc4bca4-c4cc-4b2b-8eb0-0346866ba7da)
+![20250428231313_1](https://github.com/user-attachments/assets/bdf0509f-9236-4213-a8ba-e746c83013a8)
+![20250428231256_1](https://github.com/user-attachments/assets/7a7db7b4-d594-4239-9619-1fc0d902a3bc)
+![20250428231236_1](https://github.com/user-attachments/assets/86740e10-b45b-470f-ac6e-6efa26c6ab5a)
+![20250428231205_1](https://github.com/user-attachments/assets/22ff5ab6-ca4b-463d-8cc3-49b1955c917e)
+![20250428231122_1](https://github.com/user-attachments/assets/416b93c7-ad79-4e79-84ca-3d29048c1043)
+![20250428231059_1](https://github.com/user-attachments/assets/1bf7376b-e29e-4ebd-bfaa-dd734d3a8e8b)
 
 # Performance Preset - Screenshots
 
-![IMG_2962](https://github.com/user-attachments/assets/73556919-1ec0-41ae-9295-b8d45f58894f)
-![IMG_2963](https://github.com/user-attachments/assets/576ffd95-561c-48cc-8c58-6c3b93bc4611)
-![IMG_2964](https://github.com/user-attachments/assets/820f3391-046e-4687-b11c-b5575f54b55b)
-![IMG_2965](https://github.com/user-attachments/assets/35e56a2e-cc8f-47a5-8b24-49c58b714df2)
-![IMG_2966](https://github.com/user-attachments/assets/62ff46ce-e757-481e-bfd5-3f96e93c82cc)
-![IMG_2967](https://github.com/user-attachments/assets/a8a93374-62af-4246-a7db-ab95b5a563e8)
-![IMG_2968](https://github.com/user-attachments/assets/561b67c1-940e-4035-b6b9-9b31e1aee12e)
+![20250428230538_1](https://github.com/user-attachments/assets/6b38a35c-fa87-4584-acf8-61075a37373e)
+![20250428230558_1](https://github.com/user-attachments/assets/1588f2d4-1049-491d-81da-f34e18c70973)
+![20250428230645_1](https://github.com/user-attachments/assets/e2804006-3ea4-4aa5-bcdf-8ac10d7d42b0)
+![20250428230739_1](https://github.com/user-attachments/assets/c94bec9f-1314-4a1b-936c-dc0bf8186eef)
+![20250428230810_1](https://github.com/user-attachments/assets/0c46b778-41d9-4c51-911d-5db47cb0d8c6)
+![20250428230825_1](https://github.com/user-attachments/assets/119cf86d-a038-48e6-941f-554187015c83)
+![20250428230858_1](https://github.com/user-attachments/assets/dfa204d7-3369-4ca6-93f9-3a187529b2cf)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
