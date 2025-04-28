@@ -7,9 +7,10 @@
 # How to run it?
 
 To run the Steam Deck optimization script for Oblivion Remastered:
-1. Go to Steam Deck Desktop Mode.
-2. Open the Konsole application (terminal).
-3. Copy and paste the command below into the Konsole and press enter.
+1. Run the game at least once up until the main menu after installation.
+2. Go to Steam Deck Desktop Mode.
+3. Open the Konsole application (terminal).
+4. Copy and paste the command below into the Konsole and press enter.
 
 ```
 bash <(curl -s https://raw.githubusercontent.com/krupar101/sd_oblivion_remaster_scripts/refs/heads/main/optimize_oblivion_remastered_for_steam_deck.sh)
