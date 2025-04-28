@@ -46,7 +46,8 @@ preset_choice=$(zenity --list \
     --column="Select" --column="Preset" \
     TRUE "Performance" \
     FALSE "Quality" \
-    --width=450 --height=300)
+    FALSE "Restore Defaults" \
+    --width=450 --height=350)
 
 # Check if user canceled
 if [ $? -ne 0 ]; then
@@ -61,12 +62,15 @@ if [ "$preset_choice" == "Performance" ]; then
 elif [ "$preset_choice" == "Quality" ]; then
     ZIP_URL="https://github.com/krupar101/sd_oblivion_remaster_scripts/raw/refs/heads/main/quality.zip"
     echo "Quality preset selected."
+elif [ "$preset_choice" == "Restore Defaults" ]; then
+    ZIP_URL="https://github.com/krupar101/sd_oblivion_remaster_scripts/raw/refs/heads/main/restore_defaults.zip"
+    echo "Restore Defaults selected."
 else
     echo "Unknown option selected. Exiting."
     exit 1
 fi
 
-echo $preset_choice " selected"
+echo "$preset_choice selected"
 
 # Make sure the config directory exists
 mkdir -p "$OBLIVION_REMASTERED_CONFIG_DIR"
