@@ -47,8 +47,7 @@ preset_choice=$(zenity --list \
     TRUE "Performance" \
     FALSE "Quality" \
     FALSE "Restore Defaults" \
-    FALSE "OLED Preset [testing]" \
-    --width=500 --height=400)
+    --width=450 --height=350)
 
 # Check if user canceled
 if [ $? -ne 0 ]; then
@@ -66,9 +65,6 @@ elif [ "$preset_choice" == "Quality" ]; then
 elif [ "$preset_choice" == "Restore Defaults" ]; then
     ZIP_URL="https://github.com/krupar101/sd_oblivion_remaster_scripts/raw/refs/heads/main/restore_defaults.zip"
     echo "Restore Defaults selected."
-elif [ "$preset_choice" == "OLED Preset [testing]" ]; then
-    ZIP_URL="https://github.com/krupar101/sd_oblivion_remaster_scripts/raw/refs/heads/main/oled_test.zip"
-    echo "OLED Preset [testing] selected."
 else
     echo "Unknown option selected. Exiting."
     exit 1
