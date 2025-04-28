@@ -4,7 +4,7 @@
   <img src="https://github.com/krupar101/sd_oblivion_remaster_scripts/blob/main/oblivion-remastered.gif" alt="Folondeck" />
 </p>
 
-#How to run it?
+# How to run it?
 
 To run the Steam Deck optimization script for Oblivion Remastered:
 1. Go to Steam Deck Desktop Mode.
