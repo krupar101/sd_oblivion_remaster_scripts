@@ -18,7 +18,7 @@ Alternatively you can download this .desktop file and run it without the need of
 
 [Download Optimize-Oblivion.desktop](https://raw.githubusercontent.com/krupar101/sd_oblivion_remaster_scripts/refs/heads/main/Optimize-Oblivion.desktop)
 
-(Right-Click -> Save Link As -> Save it as whatever you like but ensure it ends with .desktop -> Double Click the file) 
+(Right-Click above link -> Save Link As -> Save it as whatever you like but ensure it ends with .desktop -> Double Click the file) 
 
 # What does it do?
 
