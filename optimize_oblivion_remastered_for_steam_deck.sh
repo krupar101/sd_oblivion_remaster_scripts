@@ -12,16 +12,31 @@ echo ""
 echo "---------------------"
 sleep 1
 
-OBLIVION_REMASTERED_COMPAT_DIR="$HOME/.steam/steam/steamapps/compatdata/2623190"
-OBLIVION_REMASTERED_CONFIG_DIR="$OBLIVION_REMASTERED_COMPAT_DIR/pfx/drive_c/users/steamuser/Documents/My Games/Oblivion Remastered/Saved/Config/Windows"
+# Setup paths
+SSD_OBLIVION_REMASTERED_COMPAT_DIR="$HOME/.steam/steam/steamapps/compatdata/2623190"
+FOLDER_SUFFIX="pfx/drive_c/users/steamuser/Documents/My Games/Oblivion Remastered/Saved/Config/Windows"
 
-# Check if Oblivion Remastered is installed
-if [ -d "$OBLIVION_REMASTERED_COMPAT_DIR" ]; then
-    echo "Oblivion Remastered installation found."
+# Detect SD card mount
+SD_MOUNT=$(findmnt -rn -o TARGET | grep '/run/media' | sed 's/\\x20/ /g')
+
+if [ -n "$SD_MOUNT" ]; then
+    echo "SD Card is mounted at: $SD_MOUNT"
+    SD_OBLIVION_REMASTERED_COMPAT_DIR="$SD_MOUNT/steamapps/compatdata/2623190"
+fi
+
+# Determine where Oblivion Remastered is installed
+if [ -d "$SSD_OBLIVION_REMASTERED_COMPAT_DIR" ]; then
+    echo "Oblivion Remastered installation found on Internal SSD."
+    OBLIVION_REMASTERED_COMPAT_DIR="$SSD_OBLIVION_REMASTERED_COMPAT_DIR"
+elif [ -n "$SD_MOUNT" ] && [ -d "$SD_OBLIVION_REMASTERED_COMPAT_DIR" ]; then
+    echo "Oblivion Remastered installation found on SD Card."
+    OBLIVION_REMASTERED_COMPAT_DIR="$SD_OBLIVION_REMASTERED_COMPAT_DIR"
 else
-    echo "ERROR: Oblivion Remastered installation not found at $OBLIVION_REMASTERED_COMPAT_DIR."
+    echo "ERROR: Oblivion Remastered installation not found on Internal SSD or SD Card."
     exit 1
 fi
+
+OBLIVION_REMASTERED_CONFIG_DIR="$OBLIVION_REMASTERED_COMPAT_DIR/$FOLDER_SUFFIX"
 
 # Ask user for preset choice
 preset_choice=$(zenity --list \
@@ -51,8 +66,6 @@ else
     exit 1
 fi
 
-echo $preset_choice " selected"
-
 # Make sure the config directory exists
 mkdir -p "$OBLIVION_REMASTERED_CONFIG_DIR"
 
@@ -75,4 +88,3 @@ zenity --info \
     --width=400
 
 echo "$preset_choice preset applied successfully!"
-
