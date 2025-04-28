@@ -21,6 +21,9 @@ Alternatively you can download this .desktop file and run it without the need of
 
 (Right-Click above link -> Save Link As -> Save it as whatever you like but ensure it ends with .desktop -> Double Click the file) 
 
+WHEN APPLIED USING EITHER METHOD YOU CAN GO BACK TO GAMING MODE AND LAUNCH THE GAME. 
+YOU ONLY NEED TO DO THIS ONCE - UNLESS THOSE SETTINGS ARE OVERWRITTEN BY A GAME UPDATE IN THE FUTURE
+
 # What does it do?
 
 1. Applies the optimized ini by P40L0X (https://www.nexusmods.com/oblivionremastered/mods/35)
