@@ -36,13 +36,13 @@ Alternatively you can download this .desktop file and run it without the need of
 
 # Quality Preset - Screenshots
 
-![20250428231527_1](https://github.com/user-attachments/assets/dbc4bca4-c4cc-4b2b-8eb0-0346866ba7da)
-![20250428231313_1](https://github.com/user-attachments/assets/bdf0509f-9236-4213-a8ba-e746c83013a8)
-![20250428231256_1](https://github.com/user-attachments/assets/7a7db7b4-d594-4239-9619-1fc0d902a3bc)
-![20250428231236_1](https://github.com/user-attachments/assets/86740e10-b45b-470f-ac6e-6efa26c6ab5a)
-![20250428231205_1](https://github.com/user-attachments/assets/22ff5ab6-ca4b-463d-8cc3-49b1955c917e)
-![20250428231122_1](https://github.com/user-attachments/assets/416b93c7-ad79-4e79-84ca-3d29048c1043)
-![20250428231059_1](https://github.com/user-attachments/assets/1bf7376b-e29e-4ebd-bfaa-dd734d3a8e8b)
+![20250428231059_1](https://github.com/user-attachments/assets/82b3cb87-800b-4c9d-beff-1bb77d388fa6)
+![20250428231122_1](https://github.com/user-attachments/assets/05957519-a443-4d99-8ccb-7edc27fa5b7a)
+![20250428231205_1](https://github.com/user-attachments/assets/c6118f43-b1a6-4f08-9061-44076fdf8f1c)
+![20250428231236_1](https://github.com/user-attachments/assets/43a953b3-cabd-4835-83a0-bed26513f06f)
+![20250428231256_1](https://github.com/user-attachments/assets/ec1573ab-c7cf-47b0-aeab-086ec8e92179)
+![20250428231313_1](https://github.com/user-attachments/assets/cf72b294-0b54-4539-b62e-f76f20fdfade)
+![20250428231527_1](https://github.com/user-attachments/assets/9a16d685-f89e-47ef-9ed7-9b5390f35d31)
 
 # Performance Preset - Screenshots
 
