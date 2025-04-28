@@ -1,4 +1,7 @@
-![image](https://github.com/user-attachments/assets/0e58d110-196b-4771-8f79-6c035afc5ccd)
+
+<p align="center">
+  <img src="[https://github.com/overkillwtf/folon-steamdeck-installer/blob/main/folondeck.gif](https://github.com/user-attachments/assets/738d2e95-1f07-40f6-8cb4-7ba26964a95a)" alt="Folondeck" />
+</p>
 
 
 To run the Steam Deck optimization script for Oblivion Remastered, run the command below.
