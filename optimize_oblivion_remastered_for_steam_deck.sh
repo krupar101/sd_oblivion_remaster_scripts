@@ -66,6 +66,8 @@ else
     exit 1
 fi
 
+echo $preset_choice " selected"
+
 # Make sure the config directory exists
 mkdir -p "$OBLIVION_REMASTERED_CONFIG_DIR"
 
