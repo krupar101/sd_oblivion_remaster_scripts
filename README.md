@@ -19,3 +19,10 @@ Alternatively you can download this .desktop file and run it without the need of
 [Download Optimize-Oblivion.desktop](https://raw.githubusercontent.com/krupar101/sd_oblivion_remaster_scripts/refs/heads/main/Optimize-Oblivion.desktop)
 
 (Right-Click -> Save Link As -> Save it as whatever you like but ensure it ends with .desktop -> Double Click the file) 
+
+# What does it do?
+
+1. Applies the optimized ini by P40L0X (https://www.nexusmods.com/oblivionremastered/mods/35)
+2. Disables Lumen as per Lumen Begone mod by HerrTiSo (https://www.nexusmods.com/oblivionremastered/mods/183)
+3. Applies optimized GameUserSettings.ini (created by me)
+
