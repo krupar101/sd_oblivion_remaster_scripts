@@ -21,7 +21,6 @@ echo ""
 echo "---------------------"
 sleep 1
 
-# Function to ask for a password using zenity
 function ask_sudo_password() {
     while true; do
         SUDO_PASS=$(zenity --password --title="Enter your SUDO password")
@@ -41,7 +40,6 @@ function ask_sudo_password() {
     done
 }
 
-# Function to check if sudo password is set
 function password_set() {
     PASS_STATUS=$(passwd -S "$USER" 2>/dev/null)
     STATUS=$(echo "$PASS_STATUS" | awk '{print $2}')
@@ -52,14 +50,12 @@ function password_set() {
     fi
 }
 
-# Function to set sudo password if missing
 function ensure_sudo_password_set() {
     while true; do
         password_set
         if [ $? -ne 0 ]; then
             zenity --info --title="No Password Set" --text="You don't have a sudo password set.\nPlease set one now."
 
-            # Ask new password using Zenity
             NEW_PASS1=$(zenity --password --title="Set New SUDO Password")
             if [ $? -ne 0 ]; then
                 zenity --error --title="Cancelled" --text="Cancelled setting password. Exiting."
@@ -83,11 +79,9 @@ function ensure_sudo_password_set() {
                 continue
             fi
 
-            # Set the password for sudo use later
             SUDO_PASS="$NEW_PASS1"
         fi
 
-        # Verify sudo works
         if [ -z "$SUDO_PASS" ]; then
             ask_sudo_password
         else
@@ -101,11 +95,9 @@ function ensure_sudo_password_set() {
     done
 }
 
-# Setup paths
 SSD_OBLIVION_REMASTERED_COMPAT_DIR="$HOME/.steam/steam/steamapps/compatdata/2623190"
 FOLDER_SUFFIX="pfx/drive_c/users/steamuser/Documents/My Games/Oblivion Remastered/Saved/Config/Windows"
 
-# Detect SD card mount
 SD_MOUNT=$(findmnt -rn -o TARGET | grep '/run/media' | sed 's/\\x20/ /g')
 
 if [ -n "$SD_MOUNT" ]; then
@@ -113,7 +105,6 @@ if [ -n "$SD_MOUNT" ]; then
     SD_OBLIVION_REMASTERED_COMPAT_DIR="$SD_MOUNT/steamapps/compatdata/2623190"
 fi
 
-# Determine installation path
 if [ -d "$SSD_OBLIVION_REMASTERED_COMPAT_DIR" ]; then
     echo "Oblivion Remastered installation found on Internal SSD."
     OBLIVION_REMASTERED_COMPAT_DIR="$SSD_OBLIVION_REMASTERED_COMPAT_DIR"
@@ -131,7 +122,6 @@ FILES=(
     "$OBLIVION_REMASTERED_CONFIG_DIR/Engine.ini"
 )
 
-# Check if any of the existing files are immutable
 files_immutable=false
 for FILE in "${FILES[@]}"; do
     if [ -f "$FILE" ]; then
@@ -143,7 +133,6 @@ for FILE in "${FILES[@]}"; do
     fi
 done
 
-# If any file is immutable, ask for password and remove immutability
 if $files_immutable; then
     zenity --info --title="Files are Immutable" --text="Some config files are read-only.\nYou must unlock them to update the preset.\n\nYou will be asked for your sudo password."
 
@@ -157,7 +146,6 @@ if $files_immutable; then
     done
 fi
 
-# Ask user for preset choice
 preset_choice=$(zenity --list \
     --title="Oblivion Remastered Preset Selector" \
     --text="Which preset would you like to apply?" \
@@ -191,10 +179,8 @@ esac
 
 echo "$preset_choice selected."
 
-# Make sure the config directory exists
 mkdir -p "$OBLIVION_REMASTERED_CONFIG_DIR"
 
-# Download and unzip
 TEMP_ZIP="$OBLIVION_REMASTERED_CONFIG_DIR/preset.zip"
 
 echo "Downloading preset..."
@@ -203,12 +189,200 @@ curl -L -o "$TEMP_ZIP" "$ZIP_URL"
 echo "Unzipping preset..."
 unzip -o "$TEMP_ZIP" -d "$OBLIVION_REMASTERED_CONFIG_DIR"
 
-# Remove temporary zip
 rm -f "$TEMP_ZIP"
+
+# ── Patch Save_Settings.sav ────────────────────────────────────────
+SAVE_FILE="$OBLIVION_REMASTERED_COMPAT_DIR/pfx/drive_c/users/steamuser/Documents/My Games/Oblivion Remastered/Saved/SaveGames/Save_Settings.sav"
+
+if [[ ("$preset_choice" == "Performance" || "$preset_choice" == "Quality") && -f "$SAVE_FILE" ]]; then
+    echo "Patching Save_Settings.sav with $preset_choice preset..."
+
+    python3 - <<EOF
+from pathlib import Path
+
+# Preset values (key: binary value)
+presets = {
+    "Performance": {
+        "Altar.AllowAimAssist": b'0',
+    "Altar.Audio.AmbienceVolume": b'10.00',
+    "Altar.Audio.BassManagement": b'0',
+    "Altar.Audio.DialogueVolume": b'10.00',
+    "Altar.Audio.FootstepsVolume": b'10.00',
+    "Altar.Audio.HapticEnabled": b'0',
+    "Altar.Audio.HapticStrength": b'3',
+    "Altar.Audio.InterfaceVolume": b'10.00',
+    "Altar.Audio.MasterVolume": b'10.00',
+    "Altar.Audio.MusicVolume": b'10.00',
+    "Altar.Audio.OutputType": b'1',
+    "Altar.Audio.SfxVolume": b'10.00',
+    "Altar.BloodVFXVisibility": b'1',
+    "Altar.ChangeBloodVisibility": b'1',
+    "Altar.ControllerAimCameraSensitivity": b'50.00',
+    "Altar.ControllerAimFocusCameraSensitivity": b'50.00',
+    "Altar.ControllerCameraHorizontalSensitivity": b'50.00',
+    "Altar.ControllerCameraVerticalSensitivity": b'50.00',
+    "Altar.FSR3.FI.Enabled": b'0',
+    "Altar.FSR3.Quality": b'2',
+    "Altar.FSR3.Sharpness": b'0.000',
+    "Altar.FirstPersonFOV": b'75.00',
+    "Altar.GameDifficulty": b'0',
+    "Altar.GeneralFontSize": b'2',
+    "Altar.GraphicsOptions.AntiAliasingMode": b'4',
+    "Altar.GraphicsOptions.AutoSetBestGraphicsOptions": b'0',
+    "Altar.GraphicsOptions.Brightness": b'0.00',
+    "Altar.GraphicsOptions.ClothQuality": b'4',
+    "Altar.GraphicsOptions.EffectsQuality": b'0',
+    "Altar.GraphicsOptions.EnableHardwareRaytracing": b'0',
+    "Altar.GraphicsOptions.FoliageQuality": b'4',
+    "Altar.GraphicsOptions.FrameRateLimit": b'0',
+    "Altar.GraphicsOptions.GlobalIlluminationQuality": b'4',
+    "Altar.GraphicsOptions.HardwareRaytracingMode": b'0',
+    "Altar.GraphicsOptions.Monitor": b"'",
+    "Altar.GraphicsOptions.PostProcessQuality": b'4',
+    "Altar.GraphicsOptions.ReflectionQuality": b'4',
+    "Altar.GraphicsOptions.ScreenPercentage": b'50.00',
+    "Altar.GraphicsOptions.ScreenSpaceReflection": b'1',
+    "Altar.GraphicsOptions.ShadingQuality": b'4',
+    "Altar.GraphicsOptions.ShadowQuality": b'4',
+    "Altar.GraphicsOptions.ShowFPS": b'0',
+    "Altar.GraphicsOptions.ShowVRAM": b'0',
+    "Altar.GraphicsOptions.SoftwareRaytracingQuality": b'0',
+    "Altar.GraphicsOptions.TextureQuality": b'0',
+    "Altar.GraphicsOptions.VSync": b'0',
+    "Altar.GraphicsOptions.ViewDistanceQuality": b'1',
+    "Altar.GraphicsOptions.WindowMode": b'1',
+    "Altar.InvertControllerXAxis": b'0',
+    "Altar.InvertControllerYAxis": b'0',
+    "Altar.InvertMouseXAxis": b'0',
+    "Altar.InvertMouseYAxis": b'0',
+    "Altar.MouseAimCameraSensitivity": b'50.00',
+    "Altar.MouseAimFocusCameraSensitivity": b'50.00',
+    "Altar.MouseCameraHorizontalSensitivity": b'50.00',
+    "Altar.MouseCameraVerticalSensitivity": b'50.00',
+    "Altar.Player.HeadBobbing": b'1',
+    "Altar.SaveOnFastTravel": b'1',
+    "Altar.SaveOnLoading": b'0',
+    "Altar.SaveOnRest": b'1',
+    "Altar.SaveOnWait": b'1',
+    "Altar.ShouldCameraTrackTarget": b'0',
+    "Altar.Subtitle.Visibility": b'1',
+    "Altar.SubtitleFontSize": b' 0',
+    "Altar.ThirdPersonFOV": b'75.00',
+    "Altar.UpscalingMethod": b'3',
+    "Altar.XeSS.Quality": b'1'
+    },
+    "Quality": {
+        "Altar.AllowAimAssist": b'0',
+    "Altar.Audio.AmbienceVolume": b'10.00',
+    "Altar.Audio.BassManagement": b'0',
+    "Altar.Audio.DialogueVolume": b'10.00',
+    "Altar.Audio.FootstepsVolume": b'10.00',
+    "Altar.Audio.HapticEnabled": b'0',
+    "Altar.Audio.HapticStrength": b'3',
+    "Altar.Audio.InterfaceVolume": b'10.00',
+    "Altar.Audio.MasterVolume": b'10.00',
+    "Altar.Audio.MusicVolume": b'10.00',
+    "Altar.Audio.OutputType": b'1',
+    "Altar.Audio.SfxVolume": b'10.00',
+    "Altar.BloodVFXVisibility": b'1',
+    "Altar.ChangeBloodVisibility": b'1',
+    "Altar.ControllerAimCameraSensitivity": b'50.00',
+    "Altar.ControllerAimFocusCameraSensitivity": b'50.00',
+    "Altar.ControllerCameraHorizontalSensitivity": b'50.00',
+    "Altar.ControllerCameraVerticalSensitivity": b'50.00',
+    "Altar.FSR3.FI.Enabled": b'0',
+    "Altar.FSR3.Quality": b'2',
+    "Altar.FSR3.Sharpness": b'0.000',
+    "Altar.FirstPersonFOV": b'75.00',
+    "Altar.GameDifficulty": b'0',
+    "Altar.GeneralFontSize": b'2',
+    "Altar.GraphicsOptions.AntiAliasingMode": b'4',
+    "Altar.GraphicsOptions.AutoSetBestGraphicsOptions": b'0',
+    "Altar.GraphicsOptions.Brightness": b'0.00',
+    "Altar.GraphicsOptions.ClothQuality": b'4',
+    "Altar.GraphicsOptions.EffectsQuality": b'0',
+    "Altar.GraphicsOptions.EnableHardwareRaytracing": b'0',
+    "Altar.GraphicsOptions.FoliageQuality": b'4',
+    "Altar.GraphicsOptions.FrameRateLimit": b'0',
+    "Altar.GraphicsOptions.GlobalIlluminationQuality": b'4',
+    "Altar.GraphicsOptions.HardwareRaytracingMode": b'0',
+    "Altar.GraphicsOptions.Monitor": b"'",
+    "Altar.GraphicsOptions.PostProcessQuality": b'4',
+    "Altar.GraphicsOptions.ReflectionQuality": b'4',
+    "Altar.GraphicsOptions.ScreenPercentage": b'50.00',
+    "Altar.GraphicsOptions.ScreenSpaceReflection": b'1',
+    "Altar.GraphicsOptions.ShadingQuality": b'4',
+    "Altar.GraphicsOptions.ShadowQuality": b'4',
+    "Altar.GraphicsOptions.ShowFPS": b'0',
+    "Altar.GraphicsOptions.ShowVRAM": b'0',
+    "Altar.GraphicsOptions.SoftwareRaytracingQuality": b'0',
+    "Altar.GraphicsOptions.TextureQuality": b'1',
+    "Altar.GraphicsOptions.VSync": b'0',
+    "Altar.GraphicsOptions.ViewDistanceQuality": b'1',
+    "Altar.GraphicsOptions.WindowMode": b'1',
+    "Altar.InvertControllerXAxis": b'0',
+    "Altar.InvertControllerYAxis": b'0',
+    "Altar.InvertMouseXAxis": b'0',
+    "Altar.InvertMouseYAxis": b'0',
+    "Altar.MouseAimCameraSensitivity": b'50.00',
+    "Altar.MouseAimFocusCameraSensitivity": b'50.00',
+    "Altar.MouseCameraHorizontalSensitivity": b'50.00',
+    "Altar.MouseCameraVerticalSensitivity": b'50.00',
+    "Altar.Player.HeadBobbing": b'1',
+    "Altar.SaveOnFastTravel": b'1',
+    "Altar.SaveOnLoading": b'0',
+    "Altar.SaveOnRest": b'1',
+    "Altar.SaveOnWait": b'1',
+    "Altar.ShouldCameraTrackTarget": b'0',
+    "Altar.Subtitle.Visibility": b'1',
+    "Altar.SubtitleFontSize": b' 0',
+    "Altar.ThirdPersonFOV": b'75.00',
+    "Altar.UpscalingMethod": b'3',
+    "Altar.XeSS.Quality": b'2'
+    }
+}
+
+target_path = Path("$SAVE_FILE")
+target_data = bytearray(target_path.read_bytes())
+preset_values = presets.get("$preset_choice")
+
+def find_all_keys(data):
+    keys = {}
+    i = 0
+    while i < len(data):
+        if data[i:i+6] == b'Altar.':
+            end = data.find(b'\x00', i)
+            if end == -1:
+                break
+            key = data[i:end].decode('utf-8', errors='ignore')
+            val_start = end + 5
+            val_end = data.find(b'\x00', val_start)
+            value = data[val_start:val_end]
+            keys[key] = (i, end, val_start, val_end, value)
+            i = val_end + 1
+        else:
+            i += 1
+    return keys
+
+target_keys = find_all_keys(target_data)
+patched = 0
+for key, new_val in preset_values.items():
+    if key in target_keys:
+        _, _, val_start, val_end, old_val = target_keys[key]
+        replacement = new_val[:len(old_val)].ljust(len(old_val), b'\x00')
+        target_data[val_start:val_end] = replacement[:val_end - val_start]
+        patched += 1
+
+target_path.write_bytes(target_data)
+print(f"✅ Patched $SAVE_FILE using '$preset_choice' preset. Total settings applied: {patched}")
+EOF
+
+else
+    echo "Skipping save patch: either no Save_Settings.sav found or preset is Restore Defaults."
+fi
 
 zenity --info --title="Preset Applied" --text="$preset_choice preset has been successfully applied!" --width=400
 
-# Ask if user wants to make files immutable again
 zenity --question --title="Make Files Read-Only" --text="Would you like to make GameUserSettings.ini and Engine.ini read-only (immutable)?\n(Game updates will not break the configuration)"
 
 if [ $? -eq 0 ]; then
