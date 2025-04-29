@@ -7,7 +7,7 @@ NC='\033[0m' # No Color
 
 echo "---------------------"
 echo ""
-echo "Oblivion Remastered optimization script for Steam Deck by krupar"
+echo -e "${GREEN}Oblivion Remastered optimization script for Steam Deck by krupar${NC}"
 echo ""
 echo "---------------------"
 sleep 1
@@ -17,6 +17,51 @@ echo "Buy me a coffee @ https://ko-fi.com/krupar"
 echo ""
 echo "---------------------"
 sleep 1
+
+# Function to check if sudo works
+function check_sudo() {
+    echo "" | sudo -S -v 2>/dev/null
+    return $?
+}
+
+# Function to check if a sudo password is set
+function password_set() {
+    PASS_STATUS=$(passwd -S "$USER" 2>/dev/null)
+    STATUS=$(echo "$PASS_STATUS" | awk '{print $2}')
+    if [[ "$STATUS" == "NP" ]]; then
+        return 1
+    else
+        return 0
+    fi
+}
+
+# Function to force setting a password
+function ensure_sudo_password() {
+    while true; do
+        password_set
+        if [ $? -ne 0 ]; then
+            zenity --info --title="No Password Set" --text="No sudo password is set.\nYou must set one now to continue."
+            passwd
+            if [ $? -ne 0 ]; then
+                zenity --error --title="Password Setup Cancelled" --text="You cancelled password setup. Exiting."
+                exit 1
+            fi
+            continue
+        fi
+
+        check_sudo
+        if [ $? -ne 0 ]; then
+            zenity --warning --title="Sudo Check Failed" --text="Password may not have been set correctly.\nPlease set it again."
+            passwd
+            if [ $? -ne 0 ]; then
+                zenity --error --title="Password Setup Cancelled" --text="You cancelled password setup. Exiting."
+                exit 1
+            fi
+        else
+            break
+        fi
+    done
+}
 
 # Setup paths
 SSD_OBLIVION_REMASTERED_COMPAT_DIR="$HOME/.steam/steam/steamapps/compatdata/2623190"
@@ -64,37 +109,12 @@ done
 if $files_immutable; then
     zenity --info --title="Files are Immutable" --text="Some existing config files are read-only.\nYou must unlock them to update the preset.\n\nYou will be asked for your sudo password."
 
-    # Check if the user has a sudo password
-    PASS_STATUS=$(passwd -S "$USER" 2>/dev/null)
-    STATUS=${PASS_STATUS:${#USER}+1:2}
-    if [[ "$STATUS" == "NP" ]]; then
-        zenity --info --title="No Password Set" --text="No sudo password is set.\nYou must set one now to continue."
-        passwd
-        echo "SUDO Password is now set for $USER."
-    fi
-
-    # Prompt for sudo password with retries
-    while true; do
-        SUDO_PASS=$(zenity --password --title="Enter SUDO Password to Unlock Files")
-
-        if [ $? -ne 0 ]; then
-            zenity --error --title="Cancelled" --text="Operation cancelled by user."
-            exit 1
-        fi
-
-        echo "$SUDO_PASS" | sudo -S -v 2>/dev/null
-        if [ $? -eq 0 ]; then
-            echo "Password accepted."
-            break
-        else
-            zenity --error --title="Incorrect Password" --text="Incorrect password. Try again."
-        fi
-    done
+    ensure_sudo_password
 
     # Remove immutable flag
     for FILE in "${FILES[@]}"; do
         if [ -f "$FILE" ]; then
-            echo "$SUDO_PASS" | sudo -S chattr -i "$FILE"
+            sudo chattr -i "$FILE"
             echo "Removed immutable from $FILE"
         fi
     done
@@ -155,29 +175,11 @@ zenity --info --title="Preset Applied" --text="$preset_choice preset has been su
 zenity --question --title="Make Files Read-Only" --text="Would you like to make GameUserSettings.ini and Engine.ini read-only (immutable)?\n(Game updates will not break the configuration)"
 
 if [ $? -eq 0 ]; then
-    # If user didn't unlock files earlier, request sudo password again
-    if [ -z "$SUDO_PASS" ]; then
-        while true; do
-            SUDO_PASS=$(zenity --password --title="Enter SUDO Password to Lock Files")
-
-            if [ $? -ne 0 ]; then
-                zenity --error --title="Cancelled" --text="Operation cancelled by user."
-                exit 1
-            fi
-
-            echo "$SUDO_PASS" | sudo -S -v 2>/dev/null
-            if [ $? -eq 0 ]; then
-                echo "Password accepted."
-                break
-            else
-                zenity --error --title="Incorrect Password" --text="Incorrect password. Try again."
-            fi
-        done
-    fi
+    ensure_sudo_password
 
     for FILE in "${FILES[@]}"; do
         if [ -f "$FILE" ]; then
-            echo "$SUDO_PASS" | sudo -S chattr +i "$FILE"
+            sudo chattr +i "$FILE"
             echo "Set immutable on $FILE"
         fi
     done
