@@ -39,7 +39,7 @@ You can download this `.desktop` file and run it without needing the Konsole:
 
 ## What does it do?
 
-- Applies the optimized `Oblivion.ini` by [P40L0X](https://www.nexusmods.com/oblivionremastered/mods/35)
+- Applies the optimized `Engine.ini` by [P40L0X](https://www.nexusmods.com/oblivionremastered/mods/35)
 - Disables Lumen as per [Lumen Begone mod by HerrTiSo](https://www.nexusmods.com/oblivionremastered/mods/183)
 - Applies an optimized `GameUserSettings.ini` (created by me)
 
