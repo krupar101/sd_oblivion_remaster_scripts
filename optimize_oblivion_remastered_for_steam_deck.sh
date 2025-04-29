@@ -338,7 +338,7 @@ presets = {
     "Altar.SubtitleFontSize": b' 0',
     "Altar.ThirdPersonFOV": b'75.00',
     "Altar.UpscalingMethod": b'3',
-    "Altar.XeSS.Quality": b'2'
+    "Altar.XeSS.Quality": b'1'
     }
 }
 
