@@ -61,7 +61,4 @@ You can download this `.desktop` file and run it without needing the Konsole:
 | ![20250428230810_1](https://github.com/user-attachments/assets/0c46b778-41d9-4c51-911d-5db47cb0d8c6) | ![20250428230825_1](https://github.com/user-attachments/assets/119cf86d-a038-48e6-941f-554187015c83) |
 | ![20250428230858_1](https://github.com/user-attachments/assets/dfa204d7-3369-4ca6-93f9-3a187529b2cf) | |
 
-## Disclaimer
 
-This optimization script is provided as-is.  
-Always back up your original configuration files before applying any changes.
