@@ -10,11 +10,6 @@ SUDO_PASS=""
 
 # Functions
 ask_for_sudo_password() {
-    if [ -n "$SUDO_PASS" ]; then
-        # Password already provided and valid
-        return
-    fi
-
     while true; do
         SUDO_PASS=$(zenity --password --title="Enter SUDO Password")
 
@@ -34,13 +29,14 @@ ask_for_sudo_password() {
 }
 
 ensure_sudo_password_is_set() {
-    local PASS_STATUS
-    PASS_STATUS=$(passwd -S "$USER" 2>/dev/null)
-    local STATUS
-    STATUS=$(echo "$PASS_STATUS" | awk '{print $2}')
+    local PASS_STATUS=$(passwd -S "$USER" 2>/dev/null)
+    local STATUS=$(echo "$PASS_STATUS" | awk '{print $2}')
 
     if [[ "$STATUS" == "NP" ]]; then
         zenity --info --title="No Password Set" --text="No sudo password is set.\nYou must set one now to continue."
+
+        # Use sudo to allow password change
+        ask_for_sudo_password
 
         while true; do
             NEW_PASS1=$(zenity --password --title="Set New SUDO Password")
@@ -60,22 +56,16 @@ ensure_sudo_password_is_set() {
                 continue
             fi
 
-            # Use the already entered sudo password to set a new user password
             echo -e "$NEW_PASS1\n$NEW_PASS1" | echo "$SUDO_PASS" | sudo -S passwd "$USER"
             if [ $? -eq 0 ]; then
                 zenity --info --title="Password Set" --text="Sudo password successfully set."
-                SUDO_PASS="$NEW_PASS1"  # Update SUDO_PASS with the newly set password
+                SUDO_PASS="$NEW_PASS1"
                 break
             else
                 zenity --error --title="Error" --text="Failed to set password. Try again."
             fi
         done
     fi
-}
-
-run_sudo() {
-    # Helper function to run sudo commands using stored password
-    echo "$SUDO_PASS" | sudo -S "$@"
 }
 
 # Banner
@@ -136,13 +126,14 @@ done
 if $files_immutable; then
     zenity --info --title="Files are Immutable" --text="Some config files are read-only.\nYou must unlock them to update the preset."
 
+    # Ask for sudo password before doing anything
     ask_for_sudo_password
     ensure_sudo_password_is_set
 
     # Remove immutable
     for FILE in "${FILES[@]}"; do
         if [ -f "$FILE" ]; then
-            run_sudo chattr -i "$FILE"
+            echo "$SUDO_PASS" | sudo -S chattr -i "$FILE"
             echo "Removed immutable from $FILE"
         fi
     done
@@ -202,10 +193,11 @@ zenity --info --title="Preset Applied" --text="$preset_choice preset has been su
 zenity --question --title="Make Files Read-Only" --text="Would you like to make GameUserSettings.ini and Engine.ini read-only (immutable)?"
 
 if [ $? -eq 0 ]; then
-    # Use stored password
+    ask_for_sudo_password
+
     for FILE in "${FILES[@]}"; do
         if [ -f "$FILE" ]; then
-            run_sudo chattr +i "$FILE"
+            echo "$SUDO_PASS" | sudo -S chattr +i "$FILE"
             echo "Set immutable on $FILE"
         fi
     done
