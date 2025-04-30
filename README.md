@@ -1,6 +1,3 @@
-## 📢 NEW REDDIT POST DISCUSSION LINK
-https://www.reddit.com/r/SteamDeck/comments/1kba180/simple_steam_deck_performance_script_for_oblivion/
-
 # The Elder Scrolls IV: Oblivion Remastered - Steam Deck Optimization Script
 
 <p align="center">
