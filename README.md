@@ -45,20 +45,20 @@ You can download this `.desktop` file and run it without needing the Konsole:
 
 ## Quality Preset - Screenshots
 
-| | |
-|:--:|:--:|
-| ![20250428231059_1](https://github.com/user-attachments/assets/82b3cb87-800b-4c9d-beff-1bb77d388fa6) | ![20250428231122_1](https://github.com/user-attachments/assets/05957519-a443-4d99-8ccb-7edc27fa5b7a) |
-| ![20250428231205_1](https://github.com/user-attachments/assets/c6118f43-b1a6-4f08-9061-44076fdf8f1c) | ![20250428231236_1](https://github.com/user-attachments/assets/43a953b3-cabd-4835-83a0-bed26513f06f) |
-| ![20250428231256_1](https://github.com/user-attachments/assets/ec1573ab-c7cf-47b0-aeab-086ec8e92179) | ![20250428231313_1](https://github.com/user-attachments/assets/cf72b294-0b54-4539-b62e-f76f20fdfade) |
-| ![20250428231527_1](https://github.com/user-attachments/assets/9a16d685-f89e-47ef-9ed7-9b5390f35d31) | |
+![20250430015419_1](https://github.com/user-attachments/assets/cca66223-21b7-4077-ae07-aa11ed5d6247)
+![20250430015440_1](https://github.com/user-attachments/assets/7864882a-475a-4107-bbb9-673460f7850d)
+![20250430015520_1](https://github.com/user-attachments/assets/eef56c12-3097-49dc-9ba1-5c9189bf4ad6)
+![20250430015648_1](https://github.com/user-attachments/assets/970a1053-ea66-4e82-98e9-83b6e79d17d9)
+![20250430015706_1](https://github.com/user-attachments/assets/a050c6ba-8422-4427-ad38-2580d35017c1)
+![20250430015719_1](https://github.com/user-attachments/assets/3e653590-ce50-425c-b9a0-f47cdf773578)
+![20250430015751_1](https://github.com/user-attachments/assets/711a5458-7598-41d4-96c5-faf021e77c15)
 
 ## Performance Preset - Screenshots
 
-| | |
-|:--:|:--:|
-| ![20250428230538_1](https://github.com/user-attachments/assets/6b38a35c-fa87-4584-acf8-61075a37373e) | ![20250428230558_1](https://github.com/user-attachments/assets/1588f2d4-1049-491d-81da-f34e18c70973) |
-| ![20250428230645_1](https://github.com/user-attachments/assets/e2804006-3ea4-4aa5-bcdf-8ac10d7d42b0) | ![20250428230739_1](https://github.com/user-attachments/assets/c94bec9f-1314-4a1b-936c-dc0bf8186eef) |
-| ![20250428230810_1](https://github.com/user-attachments/assets/0c46b778-41d9-4c51-911d-5db47cb0d8c6) | ![20250428230825_1](https://github.com/user-attachments/assets/119cf86d-a038-48e6-941f-554187015c83) |
-| ![20250428230858_1](https://github.com/user-attachments/assets/dfa204d7-3369-4ca6-93f9-3a187529b2cf) | |
-
-
+![20250430020032_1](https://github.com/user-attachments/assets/cacc8d1f-c5e2-4bfc-b0f9-4f3b153f7257)
+![20250430020056_1](https://github.com/user-attachments/assets/d6528acd-7ca9-4eff-b055-c8113d29ee6e)
+![20250430020135_1](https://github.com/user-attachments/assets/ed675674-647e-4c6d-aa39-836f4e54df46)
+![20250430020227_1](https://github.com/user-attachments/assets/bdbef18d-6adb-4604-8d9f-e5b9c4208d01)
+![20250430020243_1](https://github.com/user-attachments/assets/58a315e8-9a8e-4f16-9e07-ad3de441f6e7)
+![20250430020257_1](https://github.com/user-attachments/assets/6a233a55-6e92-4e73-bb83-c69f34eacbd2)
+![20250430020332_1](https://github.com/user-attachments/assets/a157befd-0257-46f8-8716-99191863bc71)
