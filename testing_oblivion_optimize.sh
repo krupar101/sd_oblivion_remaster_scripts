@@ -363,6 +363,8 @@ echo "Patching steam resolution"
 
 # Only run if user 'deck' exists
 if [ -d "/home/deck" ]; then
+echo "User 'deck' exists"
+
 
     # Constants
     STEAM_USERDATA_PATH="/home/deck/.steam/steam/userdata"
