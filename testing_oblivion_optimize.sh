@@ -368,7 +368,7 @@ echo "User 'deck' exists"
 
     # Constants
     STEAM_USERDATA_PATH="/home/deck/.steam/steam/userdata"
-    CONFIG_PATH="config/steamapps/localconfig.vdf"
+    CONFIG_PATH="config/localconfig.vdf"
     GAME_ID="2623190"
     TARGET_KEY1="\"ResolutionOverride\""
     TARGET_VAL1="\"1280x800\""
