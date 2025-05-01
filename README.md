@@ -36,6 +36,8 @@ You can download this `.desktop` file and run it without needing the Konsole:
 > **After applying the optimization (via either method), you can return to Gaming Mode and launch the game.**
 > 
 > **You only need to do this once — unless a future game update overwrites your settings.**
+> 
+> **The optimization script does not disable achievments.**
 
 ## What does it do?
 
