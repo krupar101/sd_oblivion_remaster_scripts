@@ -287,7 +287,7 @@ presets = {
         "Altar.GraphicsOptions.TextureQuality":           b'1',
         "Altar.GraphicsOptions.ViewDistanceQuality":      b'1',
         "Altar.GraphicsOptions.VSync":                    b'0',
-        "Altar.GraphicsOptions.WindowMode":               b'0',
+        "Altar.GraphicsOptions.WindowMode":               b'1',
         "Altar.UpscalingMethod":                          b'3',
         "Altar.XeSS.Quality":                             b'3'
     },
