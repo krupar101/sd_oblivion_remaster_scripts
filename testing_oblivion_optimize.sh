@@ -242,7 +242,8 @@ presets = {
         "Altar.GraphicsOptions.TextureQuality":           b'0',
         "Altar.GraphicsOptions.ViewDistanceQuality":      b'1',
         "Altar.GraphicsOptions.VSync":                    b'0',
-        "Altar.GraphicsOptions.WindowMode": b'2',
+        "Altar.GraphicsOptions.WindowMode":               b'2',
+        "r.SetRes":                                       b'1280x800\x00',
         "Altar.UpscalingMethod":                          b'3',
         "Altar.XeSS.Quality":                             b'1'
     },
@@ -269,7 +270,8 @@ presets = {
         "Altar.GraphicsOptions.TextureQuality":           b'1',
         "Altar.GraphicsOptions.ViewDistanceQuality":      b'1',
         "Altar.GraphicsOptions.VSync":                    b'0',
-        "Altar.GraphicsOptions.WindowMode": b'2',
+        "Altar.GraphicsOptions.WindowMode":               b'2',
+        "r.SetRes":                                       b'1280x800\x00',
         "Altar.UpscalingMethod":                          b'3',
         "Altar.XeSS.Quality":                             b'1'
     },
@@ -296,7 +298,8 @@ presets = {
         "Altar.GraphicsOptions.TextureQuality":           b'1',
         "Altar.GraphicsOptions.ViewDistanceQuality":      b'1',
         "Altar.GraphicsOptions.VSync":                    b'0',
-        "Altar.GraphicsOptions.WindowMode": b'2',
+        "Altar.GraphicsOptions.WindowMode":               b'2',
+        "r.SetRes":                                       b'1280x800\x00',
         "Altar.UpscalingMethod":                          b'3',
         "Altar.XeSS.Quality":                             b'3'
     },
@@ -323,7 +326,8 @@ presets = {
         "Altar.GraphicsOptions.TextureQuality":           b'2',
         "Altar.GraphicsOptions.ViewDistanceQuality":      b'1',
         "Altar.GraphicsOptions.VSync":                    b'1',
-        "Altar.GraphicsOptions.WindowMode": b'2',
+        "Altar.GraphicsOptions.WindowMode":               b'2',
+        "r.SetRes":                                       b'1280x800\x00',
         "Altar.UpscalingMethod":                          b'3',
         "Altar.XeSS.Quality":                             b'1'
     }
