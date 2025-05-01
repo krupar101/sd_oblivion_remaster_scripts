@@ -253,7 +253,7 @@ presets = {
         "Altar.GraphicsOptions.ScreenPercentage":         b'50.00',
         "Altar.GraphicsOptions.ScreenSpaceReflection":    b'1',
         "Altar.GraphicsOptions.ShadingQuality":           b'4',
-        "Altar.GraphicsOptions.ShadowQuality":            b'3',
+        "Altar.GraphicsOptions.ShadowQuality":            b'1',
         "Altar.GraphicsOptions.ShowFPS":                  b'0',
         "Altar.GraphicsOptions.ShowVRAM":                 b'0',
         "Altar.GraphicsOptions.SoftwareRaytracingQuality": b'0',
