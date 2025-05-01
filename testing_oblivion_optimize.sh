@@ -146,6 +146,13 @@ if $files_immutable; then
     done
 fi
 
+for FILE in "${FILES[@]}"; do
+    if [ -f "$FILE" ]; then
+        chmod 644 "$FILE"
+        echo "Removed red-only from $FILE"
+    fi
+done
+
 preset_choice=$(zenity --list \
     --title="Oblivion Remastered Preset Selector" \
     --text="Which preset would you like to apply?" \
@@ -361,17 +368,9 @@ fi
 
 zenity --info --title="Preset Applied" --text="$preset_choice preset has been successfully applied!" --width=400
 
-zenity --question --title="Make Files Read-Only" --text="Would you like to make GameUserSettings.ini and Engine.ini read-only (immutable)?\n(Game updates will not break the configuration)"
-
-if [ $? -eq 0 ]; then
-    ensure_sudo_password_set
-
-    for FILE in "${FILES[@]}"; do
-        if [ -f "$FILE" ]; then
-            echo "$SUDO_PASS" | sudo -S chattr +i "$FILE"
-            echo "Set immutable on $FILE"
-        fi
-    done
-
-    zenity --info --title="Success" --text="Files are now read-only (immutable)!"
-fi
+for FILE in "${FILES[@]}"; do
+    if [ -f "$FILE" ]; then
+        chmod 444 "$FILE"
+        echo "Set read only on $FILE"
+    fi
+done
