@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "RES2"
+echo "TEST 1"
 
 # Colors for echo
 GREEN='\033[0;32m'
@@ -243,7 +243,6 @@ presets = {
         "Altar.GraphicsOptions.ViewDistanceQuality":      b'1',
         "Altar.GraphicsOptions.VSync":                    b'0',
         "Altar.GraphicsOptions.WindowMode": b'2',
-        "r.SetRes": b'1280x800',
         "Altar.UpscalingMethod":                          b'3',
         "Altar.XeSS.Quality":                             b'1'
     },
@@ -271,7 +270,6 @@ presets = {
         "Altar.GraphicsOptions.ViewDistanceQuality":      b'1',
         "Altar.GraphicsOptions.VSync":                    b'0',
         "Altar.GraphicsOptions.WindowMode": b'2',
-        "r.SetRes": b'1280x800',
         "Altar.UpscalingMethod":                          b'3',
         "Altar.XeSS.Quality":                             b'1'
     },
@@ -299,7 +297,6 @@ presets = {
         "Altar.GraphicsOptions.ViewDistanceQuality":      b'1',
         "Altar.GraphicsOptions.VSync":                    b'0',
         "Altar.GraphicsOptions.WindowMode": b'2',
-        "r.SetRes": b'1280x800',
         "Altar.UpscalingMethod":                          b'3',
         "Altar.XeSS.Quality":                             b'3'
     },
@@ -327,7 +324,6 @@ presets = {
         "Altar.GraphicsOptions.ViewDistanceQuality":      b'1',
         "Altar.GraphicsOptions.VSync":                    b'1',
         "Altar.GraphicsOptions.WindowMode": b'2',
-        "r.SetRes": b'1280x800',
         "Altar.UpscalingMethod":                          b'3',
         "Altar.XeSS.Quality":                             b'1'
     }
@@ -361,7 +357,8 @@ patched = 0
 for key, new_val in preset_values.items():
     if key in target_keys:
         _, _, val_start, val_end, old_val = target_keys[key]
-        replacement = new_val.ljust(val_end - val_start, b'\x00')
+        expected_len = val_end - val_start
+        replacement = new_val[:expected_len].ljust(expected_len, b'\x00')
         target_data[val_start:val_end] = replacement
         patched += 1
 
