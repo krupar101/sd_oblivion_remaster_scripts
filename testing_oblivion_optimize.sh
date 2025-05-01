@@ -152,9 +152,9 @@ preset_choice=$(zenity --list \
     --radiolist \
     --column="Select" --column="Preset" \
     TRUE "Quality" \
-    FALSE "Krupar" \
     FALSE "Overkill" \
     FALSE "Performance" \
+    FALSE "Krupar" \
     FALSE "Restore Defaults" \
     --width=450 --height=350)
 
@@ -171,10 +171,10 @@ case "$preset_choice" in
         ZIP_URL="https://github.com/krupar101/sd_oblivion_remaster_scripts/raw/refs/heads/main/quality.zip"
         ;;
     "Overkill")
-        ZIP_URL="https://github.com/krupar101/sd_oblivion_remaster_scripts/raw/refs/heads/main/overkill.zip"
+        ZIP_URL="https://github.com/krupar101/sd_oblivion_remaster_scripts/raw/refs/heads/main/quality.zip"
         ;;
     "Krupar")
-        ZIP_URL="https://github.com/krupar101/sd_oblivion_remaster_scripts/raw/refs/heads/main/krupar.zip"
+        ZIP_URL="https://github.com/krupar101/sd_oblivion_remaster_scripts/raw/refs/heads/main/quality.zip"
         ;;
     "Restore Defaults")
         ZIP_URL="https://github.com/krupar101/sd_oblivion_remaster_scripts/raw/refs/heads/main/restore_defaults.zip"
@@ -218,7 +218,6 @@ presets = {
         "Altar.GraphicsOptions.EffectsQuality":           b'0',
         "Altar.GraphicsOptions.EnableHardwareRaytracing": b'0',
         "Altar.GraphicsOptions.FoliageQuality":           b'4',
-        "Altar.GraphicsOptions.FrameRateLimit":           b'0',
         "Altar.GraphicsOptions.GlobalIlluminationQuality": b'4',
         "Altar.GraphicsOptions.HardwareRaytracingMode":   b'0',
         "Altar.GraphicsOptions.Monitor":                  b"'",
@@ -246,7 +245,6 @@ presets = {
         "Altar.GraphicsOptions.EffectsQuality":           b'0',
         "Altar.GraphicsOptions.EnableHardwareRaytracing": b'0',
         "Altar.GraphicsOptions.FoliageQuality":           b'4',
-        "Altar.GraphicsOptions.FrameRateLimit":           b'0',
         "Altar.GraphicsOptions.GlobalIlluminationQuality": b'4',
         "Altar.GraphicsOptions.HardwareRaytracingMode":   b'0',
         "Altar.GraphicsOptions.Monitor":                  b"'",
@@ -274,7 +272,6 @@ presets = {
         "Altar.GraphicsOptions.EffectsQuality":           b'0',
         "Altar.GraphicsOptions.EnableHardwareRaytracing": b'0',
         "Altar.GraphicsOptions.FoliageQuality":           b'1',
-        "Altar.GraphicsOptions.FrameRateLimit":           b'30',
         "Altar.GraphicsOptions.GlobalIlluminationQuality": b'1',
         "Altar.GraphicsOptions.HardwareRaytracingMode":   b'0',
         "Altar.GraphicsOptions.Monitor":                  b"'",
@@ -302,7 +299,6 @@ presets = {
         "Altar.GraphicsOptions.EffectsQuality":           b'2',
         "Altar.GraphicsOptions.EnableHardwareRaytracing": b'0',
         "Altar.GraphicsOptions.FoliageQuality":           b'1',
-        "Altar.GraphicsOptions.FrameRateLimit":           b'0',
         "Altar.GraphicsOptions.GlobalIlluminationQuality": b'1',
         "Altar.GraphicsOptions.HardwareRaytracingMode":   b'0',
         "Altar.GraphicsOptions.Monitor":                  b"'",
@@ -323,7 +319,6 @@ presets = {
         "Altar.XeSS.Quality":                             b'1'
     }
 }
-
 
 target_path = Path("$SAVE_FILE")
 target_data = bytearray(target_path.read_bytes())
