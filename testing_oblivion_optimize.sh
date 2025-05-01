@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "RES"
+echo "RES1"
 
 # Colors for echo
 GREEN='\033[0;32m'
@@ -361,8 +361,8 @@ patched = 0
 for key, new_val in preset_values.items():
     if key in target_keys:
         _, _, val_start, val_end, old_val = target_keys[key]
-        replacement = new_val[:len(old_val)].ljust(len(old_val), b'\x00')
-        target_data[val_start:val_end] = replacement[:val_end - val_start]
+        replacement = new_val.ljust(val_end - val_start, b'\x00')
+        target_data[val_start:val_end] = replacement
         patched += 1
 
 target_path.write_bytes(target_data)
