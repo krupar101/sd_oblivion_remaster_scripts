@@ -361,94 +361,89 @@ fi
 
 echo "Patching steam resolution"
 
-# Constants
-STEAM_USERDATA_PATH="$HOME/.steam/steam/userdata"
-CONFIG_PATH="config/steamapps/localconfig.vdf"
-GAME_ID="2623190"
-TARGET_KEY1="\"ResolutionOverride\""
-TARGET_VAL1="\"1280x800\""
-TARGET_KEY2="\"ResolutionOverrideInternalDisplay\""
-TARGET_VAL2="\"1\""
+# Only run if user 'deck' exists
+if [ -d "/home/deck" ]; then
 
-find "$STEAM_USERDATA_PATH" -type f -path "*/$CONFIG_PATH" | while read -r file; do
-    echo "Processing: $file"
-    cp "$file" "$file.bak"
+    # Constants
+    STEAM_USERDATA_PATH="/home/deck/.steam/steam/userdata"
+    CONFIG_PATH="config/steamapps/localconfig.vdf"
+    GAME_ID="2623190"
+    TARGET_KEY1="\"ResolutionOverride\""
+    TARGET_VAL1="\"1280x800\""
+    TARGET_KEY2="\"ResolutionOverrideInternalDisplay\""
+    TARGET_VAL2="\"1\""
 
-    # Flag to check if the file needs updating
-    file_changed=false
+    find "$STEAM_USERDATA_PATH" -type f -path "*/$CONFIG_PATH" | while read -r file; do
+        echo "Processing: $file"
+        cp "$file" "$file.bak"
 
-    awk -v gid="$GAME_ID" \
-        -v key1="$TARGET_KEY1" -v val1="$TARGET_VAL1" \
-        -v key2="$TARGET_KEY2" -v val2="$TARGET_VAL2" \
-        -v changed_ref="$file_changed" '
-    BEGIN {
-        inside = 0
-        found_gid = 0
-        key1_done = 0
-        key2_done = 0
-    }
-    {
-        # Detect game block
-        if ($0 ~ "\"" gid "\"") {
-            inside = 1
-            found_gid = 1
+        awk -v gid="$GAME_ID" \
+            -v key1="$TARGET_KEY1" -v val1="$TARGET_VAL1" \
+            -v key2="$TARGET_KEY2" -v val2="$TARGET_VAL2" '
+        BEGIN {
+            inside = 0
+            found_gid = 0
+            key1_done = 0
+            key2_done = 0
         }
-
-        # If inside the block
-        if (inside) {
-            # Update ResolutionOverride if exists but wrong
-            if ($0 ~ key1) {
-                if ($0 !~ val1) {
-                    print "\t\t" key1 "\t" val1
-                    key1_done = 1
-                    next
-                } else {
-                    key1_done = 1
-                }
-            }
-            # Update ResolutionOverrideInternalDisplay if exists but wrong
-            else if ($0 ~ key2) {
-                if ($0 !~ val2) {
-                    print "\t\t" key2 "\t" val2
-                    key2_done = 1
-                    next
-                } else {
-                    key2_done = 1
-                }
+        {
+            if ($0 ~ "\"" gid "\"") {
+                inside = 1
+                found_gid = 1
             }
 
-            # If closing block brace
-            if ($0 ~ /^\s*}/) {
-                if (!key1_done) {
-                    print "\t\t" key1 "\t" val1
-                    key1_done = 1
+            if (inside) {
+                if ($0 ~ key1) {
+                    if ($0 !~ val1) {
+                        print "\t\t" key1 "\t" val1
+                        key1_done = 1
+                        next
+                    } else {
+                        key1_done = 1
+                    }
+                } else if ($0 ~ key2) {
+                    if ($0 !~ val2) {
+                        print "\t\t" key2 "\t" val2
+                        key2_done = 1
+                        next
+                    } else {
+                        key2_done = 1
+                    }
                 }
-                if (!key2_done) {
-                    print "\t\t" key2 "\t" val2
-                    key2_done = 1
-                }
-                inside = 0
-            }
-        }
-        print $0
-    }
-    END {
-        if (found_gid && (!key1_done || !key2_done)) {
-            exit 2  # Indicate modified
-        }
-    }
-    ' "$file.bak" > "$file"
 
-    # Check for awk exit code indicating changes
-    if [ $? -eq 2 ]; then
-        echo "  ✏️ File updated with correct overrides."
-    elif grep -q "\"$GAME_ID\"" "$file"; then
-        echo "  ✔ Game entry already had correct overrides."
-    else
-        echo "  ❌ Game ID $GAME_ID not found in file."
-        mv "$file.bak" "$file"  # restore original
-    fi
-done
+                if ($0 ~ /^\s*}/) {
+                    if (!key1_done) print "\t\t" key1 "\t" val1
+                    if (!key2_done) print "\t\t" key2 "\t" val2
+                    inside = 0
+                }
+            }
+
+            print $0
+        }
+        END {
+            if (!found_gid)
+                exit 1
+            else if (!key1_done || !key2_done)
+                exit 2
+        }
+        ' "$file.bak" > "$file"
+
+        result=$?
+
+        if [ $result -eq 2 ]; then
+            echo "  ✏️ File updated with correct overrides."
+        elif [ $result -eq 1 ]; then
+            echo "  ❌ Game ID $GAME_ID not found in file."
+            mv "$file.bak" "$file"
+        else
+            echo "  ✔ Game entry already had correct overrides."
+            rm "$file.bak"
+        fi
+    done
+
+else
+    echo "User 'deck' not found. Skipping patch."
+fi
 
 zenity --info --title="Preset Applied" --text="$preset_choice preset has been successfully applied!" --width=400
 
