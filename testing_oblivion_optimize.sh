@@ -359,6 +359,8 @@ else
     echo "Skipping save patch: either no Save_Settings.sav found or preset is Restore Defaults."
 fi
 
+echo "Patching steam resolution"
+
 # Constants
 STEAM_USERDATA_PATH="$HOME/.steam/steam/userdata"
 CONFIG_PATH="config/steamapps/localconfig.vdf"
