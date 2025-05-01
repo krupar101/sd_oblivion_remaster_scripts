@@ -211,6 +211,7 @@ from pathlib import Path
 # Preset values (key: binary value)
 presets = {
     "Performance": {
+        "r.SetRes":         b'1280x800',
         "Altar.GraphicsOptions.AntiAliasingMode":         b'4',
         "Altar.GraphicsOptions.AutoSetBestGraphicsOptions": b'0',
         "Altar.GraphicsOptions.Brightness":               b'0.00',
@@ -238,6 +239,7 @@ presets = {
         "Altar.XeSS.Quality":                             b'1'
     },
     "Quality": {
+        "r.SetRes":         b'1280x800',
         "Altar.GraphicsOptions.AntiAliasingMode":         b'4',
         "Altar.GraphicsOptions.AutoSetBestGraphicsOptions": b'0',
         "Altar.GraphicsOptions.Brightness":               b'0.00',
@@ -265,6 +267,7 @@ presets = {
         "Altar.XeSS.Quality":                             b'1'
     },
     "Overkill": {
+        "r.SetRes":         b'1280x800',
         "Altar.GraphicsOptions.AntiAliasingMode":         b'4',
         "Altar.GraphicsOptions.AutoSetBestGraphicsOptions": b'0',
         "Altar.GraphicsOptions.Brightness":               b'0.00',
@@ -292,6 +295,7 @@ presets = {
         "Altar.XeSS.Quality":                             b'3'
     },
     "Krupar": {
+        "r.SetRes":         b'1280x800',
         "Altar.GraphicsOptions.AntiAliasingMode":         b'4',
         "Altar.GraphicsOptions.AutoSetBestGraphicsOptions": b'0',
         "Altar.GraphicsOptions.Brightness":               b'0.00',
