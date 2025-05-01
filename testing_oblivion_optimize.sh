@@ -240,7 +240,8 @@ presets = {
         "Altar.GraphicsOptions.TextureQuality":           b'0',
         "Altar.GraphicsOptions.ViewDistanceQuality":      b'1',
         "Altar.GraphicsOptions.VSync":                    b'0',
-        "Altar.GraphicsOptions.WindowMode":               b'1',
+        "Altar.GraphicsOptions.WindowMode": b'2',
+        "r.SetRes": b'1280x800',
         "Altar.UpscalingMethod":                          b'3',
         "Altar.XeSS.Quality":                             b'1'
     },
@@ -267,7 +268,8 @@ presets = {
         "Altar.GraphicsOptions.TextureQuality":           b'1',
         "Altar.GraphicsOptions.ViewDistanceQuality":      b'1',
         "Altar.GraphicsOptions.VSync":                    b'0',
-        "Altar.GraphicsOptions.WindowMode":               b'1',
+        "Altar.GraphicsOptions.WindowMode": b'2',
+        "r.SetRes": b'1280x800',
         "Altar.UpscalingMethod":                          b'3',
         "Altar.XeSS.Quality":                             b'1'
     },
@@ -294,7 +296,8 @@ presets = {
         "Altar.GraphicsOptions.TextureQuality":           b'1',
         "Altar.GraphicsOptions.ViewDistanceQuality":      b'1',
         "Altar.GraphicsOptions.VSync":                    b'0',
-        "Altar.GraphicsOptions.WindowMode":               b'1',
+        "Altar.GraphicsOptions.WindowMode": b'2',
+        "r.SetRes": b'1280x800',
         "Altar.UpscalingMethod":                          b'3',
         "Altar.XeSS.Quality":                             b'3'
     },
@@ -321,7 +324,8 @@ presets = {
         "Altar.GraphicsOptions.TextureQuality":           b'2',
         "Altar.GraphicsOptions.ViewDistanceQuality":      b'1',
         "Altar.GraphicsOptions.VSync":                    b'1',
-        "Altar.GraphicsOptions.WindowMode":               b'1',
+        "Altar.GraphicsOptions.WindowMode": b'2',
+        "r.SetRes": b'1280x800',
         "Altar.UpscalingMethod":                          b'3',
         "Altar.XeSS.Quality":                             b'1'
     }
@@ -335,7 +339,7 @@ def find_all_keys(data):
     keys = {}
     i = 0
     while i < len(data):
-        if data[i:i+6] == b'Altar.':
+        if data[i:i+6] == b'Altar.' or data[i:i+8] == b'r.SetRes':
             end = data.find(b'\x00', i)
             if end == -1:
                 break
@@ -348,6 +352,7 @@ def find_all_keys(data):
         else:
             i += 1
     return keys
+
 
 target_keys = find_all_keys(target_data)
 patched = 0
