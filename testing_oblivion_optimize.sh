@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "RES1"
+echo "RES2"
 
 # Colors for echo
 GREEN='\033[0;32m'
