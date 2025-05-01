@@ -363,88 +363,99 @@ echo "Patching steam resolution"
 
 # Only run if user 'deck' exists
 if [ -d "/home/deck" ]; then
-echo "User 'deck' exists"
 
-
-    # Constants
-    STEAM_USERDATA_PATH="/home/deck/.steam/steam/userdata"
     CONFIG_PATH="config/localconfig.vdf"
-    GAME_ID="2623190"
-    TARGET_KEY1="\"ResolutionOverride\""
-    TARGET_VAL1="\"1280x800\""
-    TARGET_KEY2="\"ResolutionOverrideInternalDisplay\""
-    TARGET_VAL2="\"1\""
+    USERDATA_PATH="/home/deck/.steam/steam/userdata"
 
-    find "$STEAM_USERDATA_PATH" -type f -path "*/$CONFIG_PATH" | while read -r file; do
-        echo "Processing: $file"
+    find "$USERDATA_PATH" -type f -path "*/$CONFIG_PATH" | while read -r file; do
+        echo "🔍 Processing: $file"
         cp "$file" "$file.bak"
 
-        awk -v gid="$GAME_ID" \
-            -v key1="$TARGET_KEY1" -v val1="$TARGET_VAL1" \
-            -v key2="$TARGET_KEY2" -v val2="$TARGET_VAL2" '
-        BEGIN {
-            inside = 0
-            found_gid = 0
-            key1_done = 0
-            key2_done = 0
-        }
-        {
-            if ($0 ~ "\"" gid "\"") {
-                inside = 1
-                found_gid = 1
-            }
+        python3 - "$file" << 'EOF'
+import sys
+import re
 
-            if (inside) {
-                if ($0 ~ key1) {
-                    if ($0 !~ val1) {
-                        print "\t\t" key1 "\t" val1
-                        key1_done = 1
-                        next
-                    } else {
-                        key1_done = 1
-                    }
-                } else if ($0 ~ key2) {
-                    if ($0 !~ val2) {
-                        print "\t\t" key2 "\t" val2
-                        key2_done = 1
-                        next
-                    } else {
-                        key2_done = 1
-                    }
-                }
+FILE = sys.argv[1]
+KEY1 = '"ResolutionOverride"\t\t"1280x800"'
+KEY2 = '"ResolutionOverrideInternalDisplay"\t\t"1"'
 
-                if ($0 ~ /^\s*}/) {
-                    if (!key1_done) print "\t\t" key1 "\t" val1
-                    if (!key2_done) print "\t\t" key2 "\t" val2
-                    inside = 0
-                }
-            }
+with open(FILE, 'r', encoding='utf-8') as f:
+    lines = f.readlines()
 
-            print $0
-        }
-        END {
-            if (!found_gid)
-                exit 1
-            else if (!key1_done || !key2_done)
-                exit 2
-        }
-        ' "$file.bak" > "$file"
+output_lines = []
+in_game_block = False
+start_line = None
+end_line = None
+brace_level = 0
+base_indent = ''
+key1_found = False
+key2_found = False
 
-        result=$?
+i = 0
+while i < len(lines):
+    line = lines[i].rstrip('\n')
+    if not in_game_block and re.match(r'^\s*"2623190"\s*$', line):
+        if i + 1 < len(lines) and re.match(r'^(\s*){\s*$', lines[i + 1]):
+            in_game_block = True
+            start_line = i
+            base_indent = re.match(r'^(\s*){', lines[i + 1]).group(1)
+            brace_level = 1
+            i += 2
+            continue
 
-        if [ $result -eq 2 ]; then
-            echo "  ✏️ File updated with correct overrides."
-        elif [ $result -eq 1 ]; then
-            echo "  ❌ Game ID $GAME_ID not found in file."
-            mv "$file.bak" "$file"
-        else
-            echo "  ✔ Game entry already had correct overrides."
+    if in_game_block:
+        current_line = lines[i].rstrip('\n')
+        brace_level += current_line.count('{') - current_line.count('}')
+        if '"ResolutionOverride"' in current_line:
+            key1_found = True
+        if '"ResolutionOverrideInternalDisplay"' in current_line:
+            key2_found = True
+        if brace_level == 0:
+            end_line = i
+            break
+    i += 1
+
+if start_line is not None and end_line is not None:
+    insert_indent = base_indent + "\t"
+    new_key1 = insert_indent + KEY1 + "\n"
+    new_key2 = insert_indent + KEY2 + "\n"
+    block = lines[start_line:end_line + 1]
+
+    for idx in range(len(block)):
+        if '"ResolutionOverride"' in block[idx] and '1280x800' not in block[idx]:
+            block[idx] = new_key1
+        if '"ResolutionOverrideInternalDisplay"' in block[idx] and '"1"' not in block[idx]:
+            block[idx] = new_key2
+
+    if not key1_found or not key2_found:
+        insert_index = -1
+        for idx in reversed(range(len(block))):
+            if re.match(r'^\s*}\s*$', block[idx]):
+                insert_index = idx
+                break
+        if not key1_found:
+            block.insert(insert_index, new_key1)
+        if not key2_found:
+            block.insert(insert_index, new_key2)
+
+    output_lines = lines[:start_line] + block + lines[end_line + 1:]
+    with open(FILE, 'w', encoding='utf-8') as f:
+        f.writelines(output_lines)
+    print("✅ File patched successfully.")
+else:
+    print("❌ Game ID 2623190 block not found.")
+EOF
+
+        if cmp -s "$file.bak" "$file"; then
+            echo "  ✔ No changes needed."
             rm "$file.bak"
+        else
+            echo "  ✏️ Overrides inserted or updated."
         fi
     done
 
 else
-    echo "User 'deck' not found. Skipping patch."
+    echo "❌ User 'deck' not found. Skipping patch."
 fi
 
 zenity --info --title="Preset Applied" --text="$preset_choice preset has been successfully applied!" --width=400
