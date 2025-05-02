@@ -11,6 +11,16 @@ It applies performance tweaks, disables unnecessary features, and sets optimized
 
 To run the Steam Deck optimization script for Oblivion Remastered:
 
+You can download this `.desktop` file and run it without needing the Konsole:
+
+[Download Optimize-Oblivion.desktop](https://raw.githubusercontent.com/krupar101/sd_oblivion_remaster_scripts/refs/heads/main/Optimize-Oblivion.desktop)
+
+**Instructions:**
+- Right-click the link above → **Save Link As** → Save it anywhere you like but make sure it ends with `.desktop`.
+- Then double-click the file to run it.
+
+### Alternatively: Use the konsole command
+
 1. Run the game at least once up until the main menu after installation.
 2. Go to Steam Deck Desktop Mode.
 3. Open the **Konsole** application (terminal).
@@ -19,16 +29,6 @@ To run the Steam Deck optimization script for Oblivion Remastered:
 ```bash
 bash <(curl -s https://raw.githubusercontent.com/krupar101/sd_oblivion_remaster_scripts/refs/heads/main/optimize_oblivion_remastered_for_steam_deck.sh)
 ```
-
-### Alternatively: Use the .desktop file
-
-You can download this `.desktop` file and run it without needing the Konsole:
-
-[Download Optimize-Oblivion.desktop](https://raw.githubusercontent.com/krupar101/sd_oblivion_remaster_scripts/refs/heads/main/Optimize-Oblivion.desktop)
-
-**Instructions:**
-- Right-click the link above → **Save Link As** → Save it anywhere you like but make sure it ends with `.desktop`.
-- Then double-click the file to run it.
 
 > ## 📢 Important
 > 
