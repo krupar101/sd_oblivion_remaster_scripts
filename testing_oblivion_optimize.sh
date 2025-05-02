@@ -221,7 +221,7 @@ from pathlib import Path
 presets = {
     "Performance": {
         "Altar.GraphicsOptions.AntiAliasingMode":         b'4',
-        "Altar.GraphicsOptions.FrameRateLimit":           b'0',
+        "Altar.GraphicsOptions.FrameRateLimit":           b'60',
         "Altar.GraphicsOptions.AutoSetBestGraphicsOptions": b'0',
         "Altar.GraphicsOptions.Brightness":               b'0.00',
         "Altar.GraphicsOptions.ClothQuality":             b'4',
@@ -250,7 +250,7 @@ presets = {
     },
     "Quality": {
         "Altar.GraphicsOptions.AntiAliasingMode":         b'4',
-        "Altar.GraphicsOptions.FrameRateLimit":           b'0',
+        "Altar.GraphicsOptions.FrameRateLimit":           b'60',
         "Altar.GraphicsOptions.AutoSetBestGraphicsOptions": b'0',
         "Altar.GraphicsOptions.Brightness":               b'0.00',
         "Altar.GraphicsOptions.ClothQuality":             b'4',
