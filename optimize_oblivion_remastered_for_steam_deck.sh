@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "TEST 3"
+
 # Colors for echo
 GREEN='\033[0;32m'
 RED='\033[0;31m'
@@ -151,8 +153,8 @@ preset_choice=$(zenity --list \
     --text="Which preset would you like to apply?" \
     --radiolist \
     --column="Select" --column="Preset" \
-    TRUE "Performance" \
-    FALSE "Quality" \
+    TRUE "Better Visuals (overkill.wtf)" \
+    FALSE "Better Performance" \
     FALSE "Restore Defaults" \
     --width=450 --height=350)
 
@@ -161,11 +163,18 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
+for FILE in "${FILES[@]}"; do
+    if [ -f "$FILE" ]; then
+        chmod 644 "$FILE"
+        echo "Removed red-only from $FILE"
+    fi
+done
+
 case "$preset_choice" in
-    "Performance")
-        ZIP_URL="https://github.com/krupar101/sd_oblivion_remaster_scripts/raw/refs/heads/main/performance.zip"
+    "Better Visuals (overkill.wtf)")
+        ZIP_URL="https://github.com/krupar101/sd_oblivion_remaster_scripts/raw/refs/heads/main/overkill.zip"
         ;;
-    "Quality")
+    "Better Performance")
         ZIP_URL="https://github.com/krupar101/sd_oblivion_remaster_scripts/raw/refs/heads/main/quality.zip"
         ;;
     "Restore Defaults")
@@ -194,7 +203,7 @@ rm -f "$TEMP_ZIP"
 # ── Patch Save_Settings.sav ────────────────────────────────────────
 SAVE_FILE="$OBLIVION_REMASTERED_COMPAT_DIR/pfx/drive_c/users/steamuser/Documents/My Games/Oblivion Remastered/Saved/SaveGames/Save_Settings.sav"
 
-if [[ ("$preset_choice" == "Performance" || "$preset_choice" == "Quality") && -f "$SAVE_FILE" ]]; then
+if [[ ("$preset_choice" == "Better Visuals (overkill.wtf)" || "$preset_choice" == "Better Performance") && -f "$SAVE_FILE" ]]; then
     echo "Patching Save_Settings.sav with $preset_choice preset..."
 
     python3 - <<EOF
@@ -202,61 +211,59 @@ from pathlib import Path
 
 # Preset values (key: binary value)
 presets = {
-    "Performance": {
-        "Altar.GraphicsOptions.AntiAliasingMode": b'4',
-    "Altar.GraphicsOptions.AutoSetBestGraphicsOptions": b'0',
-    "Altar.GraphicsOptions.Brightness": b'0.00',
-    "Altar.GraphicsOptions.ClothQuality": b'4',
-    "Altar.GraphicsOptions.EffectsQuality": b'0',
-    "Altar.GraphicsOptions.EnableHardwareRaytracing": b'0',
-    "Altar.GraphicsOptions.FoliageQuality": b'4',
-    "Altar.GraphicsOptions.FrameRateLimit": b'0',
-    "Altar.GraphicsOptions.GlobalIlluminationQuality": b'4',
-    "Altar.GraphicsOptions.HardwareRaytracingMode": b'0',
-    "Altar.GraphicsOptions.Monitor": b"'",
-    "Altar.GraphicsOptions.PostProcessQuality": b'4',
-    "Altar.GraphicsOptions.ReflectionQuality": b'4',
-    "Altar.GraphicsOptions.ScreenPercentage": b'50.00',
-    "Altar.GraphicsOptions.ScreenSpaceReflection": b'1',
-    "Altar.GraphicsOptions.ShadingQuality": b'4',
-    "Altar.GraphicsOptions.ShadowQuality": b'4',
-    "Altar.GraphicsOptions.ShowFPS": b'0',
-    "Altar.GraphicsOptions.ShowVRAM": b'0',
-    "Altar.GraphicsOptions.SoftwareRaytracingQuality": b'0',
-    "Altar.GraphicsOptions.TextureQuality": b'0',
-    "Altar.GraphicsOptions.VSync": b'0',
-    "Altar.GraphicsOptions.ViewDistanceQuality": b'1',
-    "Altar.GraphicsOptions.WindowMode": b'1',
-    "Altar.UpscalingMethod": b'3',
-    "Altar.XeSS.Quality": b'1'
+    "Better Performance": {
+        "Altar.GraphicsOptions.AntiAliasingMode":         b'4',
+        "Altar.GraphicsOptions.AutoSetBestGraphicsOptions": b'0',
+        "Altar.GraphicsOptions.Brightness":               b'0.00',
+        "Altar.GraphicsOptions.ClothQuality":             b'4',
+        "Altar.GraphicsOptions.EffectsQuality":           b'0',
+        "Altar.GraphicsOptions.EnableHardwareRaytracing": b'0',
+        "Altar.GraphicsOptions.FoliageQuality":           b'4',
+        "Altar.GraphicsOptions.GlobalIlluminationQuality": b'4',
+        "Altar.GraphicsOptions.HardwareRaytracingMode":   b'0',
+        "Altar.GraphicsOptions.Monitor":                  b"'",
+        "Altar.GraphicsOptions.PostProcessQuality":       b'4',
+        "Altar.GraphicsOptions.ReflectionQuality":        b'4',
+        "Altar.GraphicsOptions.ScreenPercentage":         b'50.00',
+        "Altar.GraphicsOptions.ScreenSpaceReflection":    b'1',
+        "Altar.GraphicsOptions.ShadingQuality":           b'4',
+        "Altar.GraphicsOptions.ShadowQuality":            b'4',
+        "Altar.GraphicsOptions.ShowFPS":                  b'0',
+        "Altar.GraphicsOptions.ShowVRAM":                 b'0',
+        "Altar.GraphicsOptions.SoftwareRaytracingQuality": b'0',
+        "Altar.GraphicsOptions.TextureQuality":           b'1',
+        "Altar.GraphicsOptions.ViewDistanceQuality":      b'1',
+        "Altar.GraphicsOptions.VSync":                    b'0',
+        "Altar.GraphicsOptions.WindowMode":               b'2',
+        "Altar.UpscalingMethod":                          b'3',
+        "Altar.XeSS.Quality":                             b'1'
     },
-    "Quality": {
-        "Altar.GraphicsOptions.AntiAliasingMode": b'4',
-    "Altar.GraphicsOptions.AutoSetBestGraphicsOptions": b'0',
-    "Altar.GraphicsOptions.Brightness": b'0.00',
-    "Altar.GraphicsOptions.ClothQuality": b'4',
-    "Altar.GraphicsOptions.EffectsQuality": b'0',
-    "Altar.GraphicsOptions.EnableHardwareRaytracing": b'0',
-    "Altar.GraphicsOptions.FoliageQuality": b'4',
-    "Altar.GraphicsOptions.FrameRateLimit": b'0',
-    "Altar.GraphicsOptions.GlobalIlluminationQuality": b'4',
-    "Altar.GraphicsOptions.HardwareRaytracingMode": b'0',
-    "Altar.GraphicsOptions.Monitor": b"'",
-    "Altar.GraphicsOptions.PostProcessQuality": b'4',
-    "Altar.GraphicsOptions.ReflectionQuality": b'4',
-    "Altar.GraphicsOptions.ScreenPercentage": b'50.00',
-    "Altar.GraphicsOptions.ScreenSpaceReflection": b'1',
-    "Altar.GraphicsOptions.ShadingQuality": b'4',
-    "Altar.GraphicsOptions.ShadowQuality": b'4',
-    "Altar.GraphicsOptions.ShowFPS": b'0',
-    "Altar.GraphicsOptions.ShowVRAM": b'0',
-    "Altar.GraphicsOptions.SoftwareRaytracingQuality": b'0',
-    "Altar.GraphicsOptions.TextureQuality": b'1',
-    "Altar.GraphicsOptions.VSync": b'0',
-    "Altar.GraphicsOptions.ViewDistanceQuality": b'1',
-    "Altar.GraphicsOptions.WindowMode": b'1',
-    "Altar.UpscalingMethod": b'3',
-    "Altar.XeSS.Quality": b'1'
+    "Better Visuals (overkill.wtf)": {
+        "Altar.GraphicsOptions.AntiAliasingMode":         b'4',
+        "Altar.GraphicsOptions.AutoSetBestGraphicsOptions": b'0',
+        "Altar.GraphicsOptions.Brightness":               b'0.00',
+        "Altar.GraphicsOptions.ClothQuality":             b'0',
+        "Altar.GraphicsOptions.EffectsQuality":           b'0',
+        "Altar.GraphicsOptions.EnableHardwareRaytracing": b'0',
+        "Altar.GraphicsOptions.FoliageQuality":           b'1',
+        "Altar.GraphicsOptions.GlobalIlluminationQuality": b'1',
+        "Altar.GraphicsOptions.HardwareRaytracingMode":   b'0',
+        "Altar.GraphicsOptions.Monitor":                  b"'",
+        "Altar.GraphicsOptions.PostProcessQuality":       b'1',
+        "Altar.GraphicsOptions.ReflectionQuality":        b'1',
+        "Altar.GraphicsOptions.ScreenPercentage":         b'50.00',
+        "Altar.GraphicsOptions.ScreenSpaceReflection":    b'1',
+        "Altar.GraphicsOptions.ShadingQuality":           b'0',
+        "Altar.GraphicsOptions.ShadowQuality":            b'1',
+        "Altar.GraphicsOptions.ShowFPS":                  b'0',
+        "Altar.GraphicsOptions.ShowVRAM":                 b'0',
+        "Altar.GraphicsOptions.SoftwareRaytracingQuality": b'0',
+        "Altar.GraphicsOptions.TextureQuality":           b'1',
+        "Altar.GraphicsOptions.ViewDistanceQuality":      b'1',
+        "Altar.GraphicsOptions.VSync":                    b'0',
+        "Altar.GraphicsOptions.WindowMode":               b'2',
+        "Altar.UpscalingMethod":                          b'3',
+        "Altar.XeSS.Quality":                             b'3'
     }
 }
 
@@ -268,7 +275,7 @@ def find_all_keys(data):
     keys = {}
     i = 0
     while i < len(data):
-        if data[i:i+6] == b'Altar.':
+        if data[i:i+6] == b'Altar.' or data[i:i+8] == b'r.SetRes':
             end = data.find(b'\x00', i)
             if end == -1:
                 break
@@ -282,13 +289,15 @@ def find_all_keys(data):
             i += 1
     return keys
 
+
 target_keys = find_all_keys(target_data)
 patched = 0
 for key, new_val in preset_values.items():
     if key in target_keys:
         _, _, val_start, val_end, old_val = target_keys[key]
-        replacement = new_val[:len(old_val)].ljust(len(old_val), b'\x00')
-        target_data[val_start:val_end] = replacement[:val_end - val_start]
+        expected_len = val_end - val_start
+        replacement = new_val[:expected_len].ljust(expected_len, b'\x00')
+        target_data[val_start:val_end] = replacement
         patched += 1
 
 target_path.write_bytes(target_data)
@@ -301,17 +310,9 @@ fi
 
 zenity --info --title="Preset Applied" --text="$preset_choice preset has been successfully applied!" --width=400
 
-zenity --question --title="Make Files Read-Only" --text="Would you like to make GameUserSettings.ini and Engine.ini read-only (immutable)?\n(Game updates will not break the configuration)"
-
-if [ $? -eq 0 ]; then
-    ensure_sudo_password_set
-
-    for FILE in "${FILES[@]}"; do
-        if [ -f "$FILE" ]; then
-            echo "$SUDO_PASS" | sudo -S chattr +i "$FILE"
-            echo "Set immutable on $FILE"
-        fi
-    done
-
-    zenity --info --title="Success" --text="Files are now read-only (immutable)!"
-fi
+for FILE in "${FILES[@]}"; do
+    if [ -f "$FILE" ]; then
+        chmod 444 "$FILE"
+        echo "Set read only on $FILE"
+    fi
+done
