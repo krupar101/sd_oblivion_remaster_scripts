@@ -44,7 +44,7 @@ You can download this `.desktop` file and run it without needing the Konsole:
 - Applies the optimized `Engine.ini` by [P40L0X](https://www.nexusmods.com/oblivionremastered/mods/35)
 - Disables Lumen as per [Lumen Begone mod by HerrTiSo](https://www.nexusmods.com/oblivionremastered/mods/183)
 - Applies an optimized `GameUserSettings.ini` (created by me)
-- Applies optimized game settings based on selected preset [Performance or Quality] (Created by me)
+- Applies optimized game settings based on selected preset (Created by me and overkill.wtf)
 
 ## Better Visuals (overkill.wtf) preset - Screenshots
 ### Based on overkill.wtf article (https://overkill.wtf/elder-scrolls-oblivion-remastered-best-settings-steam-deck/)
