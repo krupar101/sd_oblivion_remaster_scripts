@@ -310,6 +310,7 @@ else
         --title="Save File Missing" \
         --width=400 \
         --text="The optimization was not fully completed! Please do the following:\n\n1. Run the game from Gaming Mode\n2. Go to Settings from the Main Menu\n3. Press the \"X\" button to save them (this generates a required file)\n4. Run the script one more time."
+        exit 1
     fi
     
 fi
