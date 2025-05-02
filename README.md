@@ -46,9 +46,8 @@ bash <(curl -s https://raw.githubusercontent.com/krupar101/sd_oblivion_remaster_
 - Applies an optimized `GameUserSettings.ini` (created by me)
 - Applies optimized game settings based on selected preset (Created by me and overkill.wtf)
 
-## Better Visuals (overkill.wtf) preset - Screenshots 
+## Better Visuals (overkill.wtf) preset [average ~30 FPS] - Screenshots 
 ### Based on overkill.wtf article (https://overkill.wtf/elder-scrolls-oblivion-remastered-best-settings-steam-deck/)
-#### [average ~30 FPS]
 
 ![20250502024752_1](https://github.com/user-attachments/assets/7060c495-0fd1-46dd-8e54-2bbde85a4924)
 ![20250502024934_1](https://github.com/user-attachments/assets/87eab032-9641-41f1-b161-111d9c390eea)
@@ -59,9 +58,8 @@ bash <(curl -s https://raw.githubusercontent.com/krupar101/sd_oblivion_remaster_
 ![20250502025642_1](https://github.com/user-attachments/assets/1d881bd4-403e-4ef4-bb8c-3bae8630f6ce)
 ![20250502025722_1](https://github.com/user-attachments/assets/e5875aaf-68dc-41e4-a56e-6930ae608036)
 
-## Better Performance preset - Screenshots
+## Better Performance preset [average ~45 FPS] - Screenshots
 ### Based on my personal testing
-#### [average ~45 FPS]
 
 ![20250502030201_1](https://github.com/user-attachments/assets/1ea58af7-cfb2-4e70-b97a-0104b4eee658)
 ![20250502030242_1](https://github.com/user-attachments/assets/b2f618f2-eba9-4e3f-87b4-1bd584e1e1a4)
