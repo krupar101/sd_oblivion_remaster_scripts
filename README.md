@@ -9,7 +9,7 @@ It applies performance tweaks, disables unnecessary features, and sets optimized
 
 ## How to run it?
 
-To run the Steam Deck optimization script for Oblivion Remastered:
+###To run the Steam Deck optimization script for Oblivion Remastered:
 
 You can download this `.desktop` file and run it without needing any Konsole (terminal) commands:
 
