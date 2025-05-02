@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "TEST 2"
+echo "TEST 3"
 
 # Colors for echo
 GREEN='\033[0;32m'
