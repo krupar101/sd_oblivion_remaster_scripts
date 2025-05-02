@@ -148,13 +148,6 @@ if $files_immutable; then
     done
 fi
 
-for FILE in "${FILES[@]}"; do
-    if [ -f "$FILE" ]; then
-        chmod 644 "$FILE"
-        echo "Removed red-only from $FILE"
-    fi
-done
-
 preset_choice=$(zenity --list \
     --title="Oblivion Remastered Preset Selector" \
     --text="Which preset would you like to apply?" \
@@ -171,6 +164,13 @@ if [ $? -ne 0 ]; then
     echo "Cancel pressed. Exiting."
     exit 1
 fi
+
+for FILE in "${FILES[@]}"; do
+    if [ -f "$FILE" ]; then
+        chmod 644 "$FILE"
+        echo "Removed red-only from $FILE"
+    fi
+done
 
 case "$preset_choice" in
     "Performance")
