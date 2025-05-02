@@ -16,8 +16,9 @@ You can download this `.desktop` file and run it without needing any Konsole (te
 [Download Optimize-Oblivion.desktop](https://raw.githubusercontent.com/krupar101/sd_oblivion_remaster_scripts/refs/heads/main/Optimize-Oblivion.desktop)
 
 **Instructions:**
-- Right-click the link above → **Save Link As** → Save it anywhere you like but make sure it ends with `.desktop`.
-- Then double-click the file to run it.
+1. Run the game at least once up until the main menu after installation.
+2. Right-click the link above → **Save Link As** → Save it anywhere you like but make sure it ends with `.desktop`.
+3. Then double-click the file to run it.
 
 ### Alternatively: Use the konsole command
 
