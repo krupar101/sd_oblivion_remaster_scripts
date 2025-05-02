@@ -46,22 +46,26 @@ You can download this `.desktop` file and run it without needing the Konsole:
 - Applies an optimized `GameUserSettings.ini` (created by me)
 - Applies optimized game settings based on selected preset [Performance or Quality] (Created by me)
 
-## Quality Preset - Screenshots
+## Better Visuals (overkill.wtf) preset - Screenshots
+### Based on overkill.wtf article (https://overkill.wtf/elder-scrolls-oblivion-remastered-best-settings-steam-deck/)
 
-![20250430015419_1](https://github.com/user-attachments/assets/cca66223-21b7-4077-ae07-aa11ed5d6247)
-![20250430015440_1](https://github.com/user-attachments/assets/7864882a-475a-4107-bbb9-673460f7850d)
-![20250430015520_1](https://github.com/user-attachments/assets/eef56c12-3097-49dc-9ba1-5c9189bf4ad6)
-![20250430015648_1](https://github.com/user-attachments/assets/970a1053-ea66-4e82-98e9-83b6e79d17d9)
-![20250430015706_1](https://github.com/user-attachments/assets/a050c6ba-8422-4427-ad38-2580d35017c1)
-![20250430015719_1](https://github.com/user-attachments/assets/3e653590-ce50-425c-b9a0-f47cdf773578)
-![20250430015751_1](https://github.com/user-attachments/assets/711a5458-7598-41d4-96c5-faf021e77c15)
+![20250502024752_1](https://github.com/user-attachments/assets/7060c495-0fd1-46dd-8e54-2bbde85a4924)
+![20250502024934_1](https://github.com/user-attachments/assets/87eab032-9641-41f1-b161-111d9c390eea)
+![20250502025109_1](https://github.com/user-attachments/assets/55b85970-52aa-42de-8d77-de69e0f80404)
+![20250502025153_1](https://github.com/user-attachments/assets/0d6315ea-07d5-40aa-a8d4-617275cf52f0)
+![20250502025327_1](https://github.com/user-attachments/assets/328321f3-eca3-4a7e-b683-9f5ef9322557)
+![20250502025430_1](https://github.com/user-attachments/assets/4eb59c79-4b40-445d-be02-4330ec9f3299)
+![20250502025642_1](https://github.com/user-attachments/assets/1d881bd4-403e-4ef4-bb8c-3bae8630f6ce)
+![20250502025722_1](https://github.com/user-attachments/assets/e5875aaf-68dc-41e4-a56e-6930ae608036)
 
-## Performance Preset - Screenshots
+## Better Performance preset - Screenshots
+### Based on my personal testing
 
-![20250430020032_1](https://github.com/user-attachments/assets/cacc8d1f-c5e2-4bfc-b0f9-4f3b153f7257)
-![20250430020056_1](https://github.com/user-attachments/assets/d6528acd-7ca9-4eff-b055-c8113d29ee6e)
-![20250430020135_1](https://github.com/user-attachments/assets/ed675674-647e-4c6d-aa39-836f4e54df46)
-![20250430020227_1](https://github.com/user-attachments/assets/bdbef18d-6adb-4604-8d9f-e5b9c4208d01)
-![20250430020243_1](https://github.com/user-attachments/assets/58a315e8-9a8e-4f16-9e07-ad3de441f6e7)
-![20250430020257_1](https://github.com/user-attachments/assets/6a233a55-6e92-4e73-bb83-c69f34eacbd2)
-![20250430020332_1](https://github.com/user-attachments/assets/a157befd-0257-46f8-8716-99191863bc71)
+![20250502030201_1](https://github.com/user-attachments/assets/1ea58af7-cfb2-4e70-b97a-0104b4eee658)
+![20250502030242_1](https://github.com/user-attachments/assets/b2f618f2-eba9-4e3f-87b4-1bd584e1e1a4)
+![20250502030328_1](https://github.com/user-attachments/assets/51d44d7f-c158-4846-9719-9b78fd3ad04d)
+![20250502030412_1](https://github.com/user-attachments/assets/e246ec9b-5020-422b-a172-cb1635dc98ec)
+![20250502030457_1](https://github.com/user-attachments/assets/6c47357e-b2a4-4ff0-9f7d-9ae4c291e43f)
+![20250502030524_1](https://github.com/user-attachments/assets/51707a8f-ac5a-4712-9c7e-69f29a859906)
+![20250502030557_1](https://github.com/user-attachments/assets/64ac7847-41bf-4acc-b5e1-bcfcd5adaf45)
+![20250502030623_1](https://github.com/user-attachments/assets/6469368a-77d8-4cb5-91bb-99d71b545585)
