@@ -28,7 +28,6 @@ You can download this `.desktop` file and run it without needing the Konsole:
 
 **Instructions:**
 - Right-click the link above → **Save Link As** → Save it anywhere you like but make sure it ends with `.desktop`.
-- Right-click the saved file → **Properties** → **Permissions** → Check **"Is executable"**.
 - Then double-click the file to run it.
 
 > ## 📢 Important
