@@ -315,11 +315,14 @@ else
     
 fi
 
-zenity --info --title="Preset Applied" --text="$preset_choice preset has been successfully applied!" --width=400
+if [ "$preset_choice" != "Restore Defaults" ]; then
+    for FILE in "${FILES[@]}"; do
+        if [ -f "$FILE" ]; then
+            chmod 444 "$FILE"
+            echo "Set read only on $FILE"
+        fi
+    done
+fi
 
-for FILE in "${FILES[@]}"; do
-    if [ -f "$FILE" ]; then
-        chmod 444 "$FILE"
-        echo "Set read only on $FILE"
-    fi
-done
+
+zenity --info --title="Preset Applied" --text="$preset_choice preset has been successfully applied!" --width=400
