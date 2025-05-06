@@ -368,9 +368,16 @@ EOF
 
 else
     echo "Skipping save patch: either no Save_Settings.sav found or preset is Restore Defaults."
-fi
 
-zenity --info --title="Preset Applied" --text="$preset_choice preset has been successfully applied!" --width=400
+    if [ ! -f "$SAVE_FILE" ] && [ "$preset_choice" != "Restore Defaults" ]; then
+        zenity --warning \
+        --title="Save File Missing" \
+        --width=400 \
+        --text="The optimization was not fully completed! Please do the following:\n\n1. Run the game from Gaming Mode\n2. Go to Settings from the Main Menu\n3. Press the \"X\" button to save them (this generates a required file)\n4. Run the script one more time."
+        exit 1
+    fi
+    
+fi
 
 for FILE in "${FILES[@]}"; do
     if [ -f "$FILE" ]; then
@@ -378,3 +385,5 @@ for FILE in "${FILES[@]}"; do
         echo "Set read only on $FILE"
     fi
 done
+
+zenity --info --title="Preset Applied" --text="$preset_choice preset has been successfully applied!" --width=400
